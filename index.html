@@ -55,7 +55,7 @@ a{color:inherit;text-decoration:none}
 .side-card p{font-size:.8rem;color:var(--muted);line-height:1.5;margin-top:6px}
 .side-card .meta{font-size:.7rem;color:var(--muted);margin-top:6px}
 .side-card .meta span{color:var(--ink);font-weight:500}
-.side-thumb{width:100px;height:80px;background:var(--warm);border-radius:6px}
+.side-thumb{width:100px;height:80px;background:var(--warm);border-radius:6px;position:relative;overflow:hidden}
 .side-thumb:nth-child(2){background:#e8ddd0}
 
 /* NEWS GRID — Narrative 2-col layout */
@@ -210,7 +210,7 @@ const n=allNews[0];const rest=allNews.slice(1,4);
 const tags=parseTags(n.hashtags);
 el.innerHTML=`<div class="featured">
 <div class="featured-main" onclick="showArticle('${n.slug||n.id}')">
-<div class="featured-img"></div>
+<div class="featured-img">${n.capa_noticia?`<img src="${n.capa_noticia}" referrerpolicy="no-referrer" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">`:''}</div>
 <h2>${n.titulo_noticia}</h2>
 <p>${(n.resumo_noticia||'').replace(/<[^>]*>/g,'').slice(0,180)}...</p>
 <div class="meta"><span>${tags[0]||'Cripto'}</span> · ${n.created_at?new Date(n.created_at).toLocaleDateString('es-ES',{day:'numeric',month:'short'}):''}</div>
@@ -220,7 +220,7 @@ const t=parseTags(r.hashtags);
 return`<div class="side-card" onclick="showArticle('${r.slug||r.id}')">
 <div><h3>${r.titulo_noticia}</h3><p>${(r.resumo_noticia||'').replace(/<[^>]*>/g,'').slice(0,100)}...</p>
 <div class="meta"><span>${t[0]||'Cripto'}</span> · ${r.created_at?new Date(r.created_at).toLocaleDateString('es-ES',{day:'numeric',month:'short'}):''}</div></div>
-<div class="side-thumb"></div></div>`}).join('')}
+<div class="side-thumb">${r.capa_noticia?`<img src="${r.capa_noticia}" referrerpolicy="no-referrer" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">`:''}</div></div>`}).join('')}
 </div></div>`;
 }
 
